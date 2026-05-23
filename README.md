@@ -106,3 +106,19 @@ article.
 ## License
 
 MIT. Use, fork, learn from, contribute back if you find a hole.
+
+
+### 7. Posts ledger (`gary/post_log.py`)
+
+A small Supabase-backed ledger of every public post (LinkedIn, X, future channels). One row per posted artefact: channel, slug, posted_url, posted_at, ship_ref (link to the article being promoted), hero_path, hashtags, char count, source. CLI:
+
+```bash
+workloft-post log --channel linkedin --slug X --url https://... --ship-ref https://...
+workloft-post list [--channel X]
+workloft-post show <id-prefix>
+workloft-post stats
+```
+
+The point: Maggie-style JSON queues hold intent. A posts ledger holds outcome. Different jobs. Without a separate record of what actually went out, the agent stack cannot tell scheduled-but-never-posted from genuinely-shipped.
+
+Migration: `migrations/2026-05-23-workloft-posts.sql`.
